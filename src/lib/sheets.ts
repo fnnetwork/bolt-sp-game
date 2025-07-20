@@ -1,4 +1,4 @@
-const SCRIPT_URL = 'https://script.google.com/macros/s/SEU_SCRIPT_ID/exec'; // substitua pela URL real
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxFsxNyDxSR56uzx_BQgP-kij-tAaEn3vluc9-tVIL0WzHwc2wb0qnHCT_fXvL_XZPY/exec'; // substitua pela URL real
 
 export async function addToSheet(email: string, sector: string): Promise<void> {
   await fetch(SCRIPT_URL, {
