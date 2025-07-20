@@ -1,15 +1,24 @@
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxFsxNyDxSR56uzx_BQgP-kij-tAaEn3vluc9-tVIL0WzHwc2wb0qnHCT_fXvL_XZPY/exec'; // substitua pela URL real
+const SCRIPT_URL =
+  "https://script.google.com/macros/s/AKfycbxFsxNyDxSR56uzx_BQgP-kij-tAaEn3vluc9-tVIL0WzHwc2wb0qnHCT_fXvL_XZPY/exec";
 
-export async function addToSheet(email: string, sector: string): Promise<void> {
-  await fetch(SCRIPT_URL, {
-    method: 'POST',
-    body: JSON.stringify({ email, sector }),
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  });
+export async function checkEmailInSheet(email: string): Promise<boolean> {
+  // Opcional: se quiser verificar duplicados no futuro
+  return false;
 }
 
-export async function checkEmailInSheet(): Promise<boolean> {
-  return false; // lógica opcional
+export async function addToSheet(email: string, sector: string): Promise<void> {
+  const res = await fetch(SCRIPT_URL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ email, sector }),
+  });
+
+  const text = await res.text(); // <– para debug
+  console.log("Resposta do Google Sheets:", text);
+
+  if (!res.ok) {
+    throw new Error("Erro ao salvar no Google Sheets");
+  }
 }
